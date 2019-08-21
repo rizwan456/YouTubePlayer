@@ -5,11 +5,13 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.constraint.motion.MotionLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import droids.rizz.youtubeplayer.databinding.FragmentVideoPlayerBinding;
+import droids.rizz.youtubeplayer.adadpters.VideoViewAdapter;
 
 
 /**
@@ -74,7 +76,7 @@ public class VideoPlayerFragment extends Fragment {
         videoPlayerBinding.videoMotionLayout.setTransitionListener(new MotionLayout.TransitionListener() {
             @Override
             public void onTransitionChange(MotionLayout motionLayout, int i, int i1, float v) {
-                if(getActivity() instanceof MainActivity){
+                if (getActivity() instanceof MainActivity) {
                     ((MainActivity) getActivity()).mainBinding.mainMotionLayout.setProgress(Math.abs(v));
                 }
             }
@@ -84,6 +86,12 @@ public class VideoPlayerFragment extends Fragment {
 
             }
         });
+
+        videoPlayerBinding.videoRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        videoPlayerBinding.videoRecyclerView.setAdapter(new VideoViewAdapter(getActivity(),Utility.generateVideoList()));
     }
+
+
 
 }
