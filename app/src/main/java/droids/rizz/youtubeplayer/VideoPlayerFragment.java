@@ -78,7 +78,7 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
     }
 
     private void setUp() {
-
+       // videoPlayerBinding.videoView.setImageURI(Uri.parse(mParam1));
         videoPlayerBinding.videoView.setImageResource(R.drawable.dark_knight);
         videoPlayerBinding.videoMotionLayout.setTransitionListener(new MotionLayout.TransitionListener() {
             @Override

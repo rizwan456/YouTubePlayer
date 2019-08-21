@@ -38,8 +38,7 @@ public class VideoViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof ItemViewHolder) {
-            ItemViewHolder itemViewHolder=(ItemViewHolder) viewHolder;
-            itemViewHolder.bindData(i);
+            ((ItemViewHolder) viewHolder).bindData(i);
         }
     }
 
