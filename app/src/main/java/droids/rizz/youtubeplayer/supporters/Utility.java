@@ -1,4 +1,4 @@
-package droids.rizz.youtubeplayer;
+package droids.rizz.youtubeplayer.supporters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,4 +21,6 @@ public class Utility {
         list.add(new VideoInfo("Android tutorial (2018) -11 - introduction to android","Google co. ","https://miro.medium.com/max/1400/1*AdqPO6Q8DIYvgGvOtt9vhw.jpeg"));
         return list;
     }
+
+
 }

@@ -1,22 +1,21 @@
-package droids.rizz.youtubeplayer;
+package droids.rizz.youtubeplayer.fragment;
 
 
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.constraint.motion.MotionLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
+import droids.rizz.youtubeplayer.MainActivity;
+import droids.rizz.youtubeplayer.R;
 import droids.rizz.youtubeplayer.adadpters.VideoViewAdapter;
 import droids.rizz.youtubeplayer.databinding.FragmentVideoPlayerBinding;
 import droids.rizz.youtubeplayer.interfaces.IVideoPlayer;
+import droids.rizz.youtubeplayer.supporters.Utility;
 
 
 /**
@@ -33,9 +32,9 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private boolean isFirst = false;
 
     public FragmentVideoPlayerBinding videoPlayerBinding;
-
 
     public VideoPlayerFragment() {
         // Required empty public constructor
@@ -59,27 +58,41 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
         return fragment;
     }
 
+    public static VideoPlayerFragment newInstance(String param1, String param2, boolean isFirst) {
+        VideoPlayerFragment fragment = new VideoPlayerFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        args.putBoolean("First", isFirst);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            isFirst = getArguments().getBoolean("First", false);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         videoPlayerBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_video_player, container, false);
+
         setUp();
+        //changeVideo(mParam1);
+        if (isFirst) {
+            changeVideo(mParam1);
+        }
         return videoPlayerBinding.getRoot();
     }
 
     private void setUp() {
-       // videoPlayerBinding.videoView.setImageURI(Uri.parse(mParam1));
-        videoPlayerBinding.videoView.setImageResource(R.drawable.dark_knight);
+        //videoPlayerBinding.videoView.setImageResource(R.drawable.dark_knight);
         videoPlayerBinding.videoMotionLayout.setTransitionListener(new MotionLayout.TransitionListener() {
             @Override
             public void onTransitionChange(MotionLayout motionLayout, int i, int i1, float v) {
@@ -102,6 +115,9 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
 
     @Override
     public void changeVideo(String videoUrl) {
-        videoPlayerBinding.videoView.setImageURI(Uri.parse(videoUrl));
+        videoPlayerBinding.videoView.setImageURI(videoUrl);
+        videoPlayerBinding.videoMotionLayout.post(() -> {
+            videoPlayerBinding.videoMotionLayout.transitionToEnd();
+        });
     }
 }

@@ -1,4 +1,4 @@
-package droids.rizz.youtubeplayer;
+package droids.rizz.youtubeplayer.customeview;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import droids.rizz.youtubeplayer.R;
 
 
 public class SingleViewTouchableMotionLayout extends MotionLayout {

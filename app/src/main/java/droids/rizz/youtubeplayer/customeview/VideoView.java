@@ -1,4 +1,4 @@
-package droids.rizz.youtubeplayer;
+package droids.rizz.youtubeplayer.customeview;
 
 import android.content.Context;
 import android.util.AttributeSet;
