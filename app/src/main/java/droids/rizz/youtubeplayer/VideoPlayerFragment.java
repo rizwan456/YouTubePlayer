@@ -34,7 +34,7 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
     private String mParam1;
     private String mParam2;
 
-    FragmentVideoPlayerBinding videoPlayerBinding;
+    public FragmentVideoPlayerBinding videoPlayerBinding;
 
 
     public VideoPlayerFragment() {

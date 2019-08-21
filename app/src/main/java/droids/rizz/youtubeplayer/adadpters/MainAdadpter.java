@@ -4,14 +4,19 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
 
 import droids.rizz.youtubeplayer.MainActivity;
 import droids.rizz.youtubeplayer.R;
+import droids.rizz.youtubeplayer.SingleViewTouchableMotionLayout;
+import droids.rizz.youtubeplayer.VideoPlayerFragment;
 import droids.rizz.youtubeplayer.databinding.MainViewItemsBinding;
 import droids.rizz.youtubeplayer.model.VideoInfo;
 
@@ -59,11 +64,16 @@ public class MainAdadpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             itemsBinding.videoSubTitle.setText(infoList.get(pos).getSubTitle());
             itemsBinding.videoTitle.setText(infoList.get(pos).getTitle());
 
-            /*itemsBinding.videoThumbnail.setOnClickListener(v -> {
+            itemsBinding.videoThumbnail.setOnClickListener(v -> {
                 if (context instanceof MainActivity) {
-                    ((MainActivity) context).setVideoView(infoList.get(pos).getImageUrl());
+                  // ((MainActivity) context).mainBinding.container.setVisibility(View.VISIBLE);
+                    Fragment fragment=((MainActivity) context).getSupportFragmentManager().findFragmentById(R.id.container);
+                    VideoPlayerFragment videoPlayerFragment=(VideoPlayerFragment) fragment;
+                    videoPlayerFragment.changeVideo(infoList.get(pos).getImageUrl());
+                    videoPlayerFragment.videoPlayerBinding.videoMotionLayout.transitionToEnd();
+
                 }
-            });*/
+            });
         }
     }
 }

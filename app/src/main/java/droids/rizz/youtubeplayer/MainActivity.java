@@ -15,24 +15,22 @@ import droids.rizz.youtubeplayer.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     String tag="MainActivity";
-    ActivityMainBinding mainBinding;
+    public ActivityMainBinding mainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         Fresco.initialize(this);
+        if(savedInstanceState==null){
+            getSupportFragmentManager().beginTransaction().add(R.id.container, VideoPlayerFragment.newInstance(null, null)).commit();
+        }
         setUp();
     }
 
     private void setUp() {
-        getSupportFragmentManager().beginTransaction().add(R.id.container, VideoPlayerFragment.newInstance(null, null)).commit();
         mainBinding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         mainBinding.recyclerview.setAdapter(new MainAdadpter(this, Utility.generateVideoList()));
     }
 
-    public void setVideoView(String thumbnail){
-        mainBinding.container.setVisibility(View.VISIBLE);
-        getSupportFragmentManager().beginTransaction().add(R.id.container, VideoPlayerFragment.newInstance(thumbnail, null)).commit();
-    }
 }
