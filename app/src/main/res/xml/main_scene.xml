@@ -4,9 +4,7 @@
 
     <Transition
         app:constraintSetEnd="@id/collapsed"
-        app:constraintSetStart="@id/expanded"
-        app:duration="200"
-        app:interpolator="linear">
+        app:constraintSetStart="@id/expanded">
 
         <KeyFrameSet>
             <KeyAttribute
@@ -18,13 +16,28 @@
             </KeyAttribute>
 
             <KeyAttribute
-                app:framePosition="70"
+                app:framePosition="75"
                 app:target="@id/bottomNavigationView">
                 <CustomAttribute
                     app:attributeName="translationY"
-                    app:customDimension="?attr/actionBarSize" />
+                    app:customDimension="55dp" />
             </KeyAttribute>
 
+            <KeyAttribute
+                app:framePosition="100"
+                app:target="@id/backgroundDim">
+                <CustomAttribute
+                    app:attributeName="BackgroundColor"
+                    app:customColorValue="@color/semiGray" />
+            </KeyAttribute>
+
+            <KeyAttribute
+                app:framePosition="0"
+                app:target="@id/backgroundDim">
+                <CustomAttribute
+                    app:attributeName="BackgroundColor"
+                    app:customColorValue="@android:color/transparent" />
+            </KeyAttribute>
         </KeyFrameSet>
     </Transition>
 

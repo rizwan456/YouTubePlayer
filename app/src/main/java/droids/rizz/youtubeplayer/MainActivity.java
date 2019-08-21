@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setVideoView(String thumbnail){
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, VideoPlayerFragment.newInstance(thumbnail, null)).commit();
+        mainBinding.container.setVisibility(View.VISIBLE);
+        getSupportFragmentManager().beginTransaction().add(R.id.container, VideoPlayerFragment.newInstance(thumbnail, null)).commit();
     }
 }
