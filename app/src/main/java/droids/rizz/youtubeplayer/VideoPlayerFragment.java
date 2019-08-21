@@ -2,16 +2,21 @@ package droids.rizz.youtubeplayer;
 
 
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.constraint.motion.MotionLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
-import droids.rizz.youtubeplayer.databinding.FragmentVideoPlayerBinding;
 import droids.rizz.youtubeplayer.adadpters.VideoViewAdapter;
+import droids.rizz.youtubeplayer.databinding.FragmentVideoPlayerBinding;
+import droids.rizz.youtubeplayer.interfaces.IVideoPlayer;
 
 
 /**
@@ -19,7 +24,7 @@ import droids.rizz.youtubeplayer.adadpters.VideoViewAdapter;
  * Use the {@link VideoPlayerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class VideoPlayerFragment extends Fragment {
+public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -73,6 +78,8 @@ public class VideoPlayerFragment extends Fragment {
     }
 
     private void setUp() {
+
+        videoPlayerBinding.videoView.setImageResource(R.drawable.dark_knight);
         videoPlayerBinding.videoMotionLayout.setTransitionListener(new MotionLayout.TransitionListener() {
             @Override
             public void onTransitionChange(MotionLayout motionLayout, int i, int i1, float v) {
@@ -89,9 +96,12 @@ public class VideoPlayerFragment extends Fragment {
 
         videoPlayerBinding.videoRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        videoPlayerBinding.videoRecyclerView.setAdapter(new VideoViewAdapter(getActivity(),Utility.generateVideoList()));
+        videoPlayerBinding.videoRecyclerView.setAdapter(new VideoViewAdapter(getActivity(), Utility.generateVideoList(), this));
     }
 
 
-
+    @Override
+    public void changeVideo(String videoUrl) {
+        videoPlayerBinding.videoView.setImageURI(Uri.parse(videoUrl));
+    }
 }

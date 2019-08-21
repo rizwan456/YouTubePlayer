@@ -15,6 +15,7 @@
             app:touchAnchorSide="top" />
 
         <KeyFrameSet>
+
             <KeyAttribute
                 app:framePosition="0"
                 app:target="@id/videoView">
@@ -31,7 +32,7 @@
                     app:customDimension="0dp" />
             </KeyAttribute>
 
-           <!-- <KeyAttribute
+            <KeyAttribute
                 android:alpha="0"
                 app:framePosition="0"
                 app:target="@id/videoRecyclerView" />
@@ -39,14 +40,14 @@
             <KeyAttribute
                 android:alpha="1"
                 app:framePosition="100"
-                app:target="@id/videoRecyclerView" />-->
+                app:target="@id/videoRecyclerView" />
 
-           <!-- <KeyAttribute
+            <KeyAttribute
                 app:framePosition="0"
                 app:target="@id/videoViewContainer">
                 <CustomAttribute
                     app:attributeName="cardElevation"
-                    app:customDimension="0dp" />
+                    app:customDimension="5dp" />
             </KeyAttribute>
 
             <KeyAttribute
@@ -55,7 +56,8 @@
                 <CustomAttribute
                     app:attributeName="cardElevation"
                     app:customDimension="0dp" />
-            </KeyAttribute>-->
+            </KeyAttribute>
+
 
         </KeyFrameSet>
 
@@ -99,6 +101,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
 
         <Constraint
             android:id="@id/content"

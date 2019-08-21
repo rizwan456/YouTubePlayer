@@ -6,6 +6,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
+        android:background="?android:selectableItemBackground"
         android:orientation="horizontal">
 
         <com.facebook.drawee.view.SimpleDraweeView

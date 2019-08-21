@@ -1,10 +1,11 @@
 package droids.rizz.youtubeplayer;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-public class VideoView extends AppCompatImageView {
+import com.facebook.drawee.view.SimpleDraweeView;
+
+public class VideoView extends SimpleDraweeView {
     public VideoView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }

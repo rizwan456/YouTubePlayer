@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import droids.rizz.youtubeplayer.interfaces.IVideoPlayer;
 import droids.rizz.youtubeplayer.R;
 import droids.rizz.youtubeplayer.databinding.VideoViewItemBinding;
 import droids.rizz.youtubeplayer.model.VideoInfo;
@@ -19,10 +20,12 @@ public class VideoViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     Context context;
     List<VideoInfo> infoList;
+    IVideoPlayer iVideoPlayer;
 
-    public VideoViewAdapter(Context context, List<VideoInfo> infoList) {
+    public VideoViewAdapter(Context context, List<VideoInfo> infoList, IVideoPlayer iVideoPlayer) {
         this.context = context;
         this.infoList = infoList;
+        this.iVideoPlayer = iVideoPlayer;
     }
 
     @NonNull
@@ -57,6 +60,10 @@ public class VideoViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             itemBinding.videoThumbnail.setImageURI(Uri.parse(infoList.get(pos).getImageUrl()));
             itemBinding.videoTitle.setText(infoList.get(pos).getTitle());
             itemBinding.videoSubTitle.setText(infoList.get(pos).getSubTitle());
+
+            itemBinding.getRoot().setOnClickListener(v->{
+                iVideoPlayer.changeVideo(infoList.get(pos).getImageUrl());
+            });
         }
     }
 }
