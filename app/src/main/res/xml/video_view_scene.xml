@@ -20,11 +20,11 @@
                 app:target="@id/videoView">
                 <CustomAttribute
                     app:attributeName="EndPadding"
-                    app:customDimension="@dimen/video_view_right_padding" />
+                    app:customDimension="250dp" />
             </KeyAttribute>
 
             <KeyAttribute
-                app:framePosition="30"
+                app:framePosition="40"
                 app:target="@id/videoView">
                 <CustomAttribute
                     app:attributeName="EndPadding"
