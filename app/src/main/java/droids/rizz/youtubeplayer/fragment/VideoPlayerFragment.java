@@ -134,6 +134,7 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
             public void onTransitionCompleted(MotionLayout motionLayout, int i) {
                 switch (i) {
                     case R.id.expanded:
+                        videoPlayerBinding.linearLayout.setVisibility(View.GONE);
                         break;
                     case R.id.collapsed:
                         inCollapsedView();
@@ -149,6 +150,7 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
     }
 
     private void inCollapsedView() {
+        videoPlayerBinding.linearLayout.setVisibility(View.VISIBLE);
         FrameLayout.MarginLayoutParams params = (FrameLayout.MarginLayoutParams)
                 videoPlayerBinding.linearLayout.getLayoutParams();
         params.leftMargin = videoPlayerBinding.videoView.getRight() - videoPlayerBinding.videoView.getPaddingEnd();
