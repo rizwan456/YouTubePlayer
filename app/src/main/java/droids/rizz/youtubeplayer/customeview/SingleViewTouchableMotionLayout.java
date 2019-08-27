@@ -98,9 +98,6 @@ public class SingleViewTouchableMotionLayout extends MotionLayout {
             case MotionEvent.ACTION_CANCEL:
                 touchStarted = false;
                 return super.onTouchEvent(event);
-            case MotionEvent.ACTION_DOWN:
-                touchStarted = false;
-                return super.onTouchEvent(event);
         }
         if (!touchStarted) {
             getViewToDetectTouch().getHitRect(viewRect);
