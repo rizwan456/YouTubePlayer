@@ -87,13 +87,18 @@ public class SingleViewTouchableMotionLayout extends MotionLayout {
         }
     });
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_UP:
                 touchStarted = false;
+                this.transitionToEnd();
                 return super.onTouchEvent(event);
             case MotionEvent.ACTION_CANCEL:
+                touchStarted = false;
+                return super.onTouchEvent(event);
+            case MotionEvent.ACTION_DOWN:
                 touchStarted = false;
                 return super.onTouchEvent(event);
         }

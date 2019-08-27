@@ -8,11 +8,16 @@
         app:duration="300"
         app:interpolator="easeInOut">
 
+        <!-- <OnClick
+             app:mode="toggle"
+             app:target="@+id/videoViewContainer" />-->
+
         <OnSwipe
             app:dragDirection="dragUp"
             app:maxAcceleration="200"
             app:touchAnchorId="@+id/videoViewContainer"
             app:touchAnchorSide="top" />
+
 
         <KeyFrameSet>
             <KeyAttribute
@@ -24,7 +29,7 @@
             </KeyAttribute>
 
             <KeyAttribute
-                app:framePosition="40"
+                app:framePosition="15"
                 app:target="@id/videoView">
                 <CustomAttribute
                     app:attributeName="EndPadding"

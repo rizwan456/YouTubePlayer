@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 
 import droids.rizz.youtubeplayer.MainActivity;
 import droids.rizz.youtubeplayer.R;
@@ -126,6 +125,9 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
         videoPlayerBinding.videoRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         videoPlayerBinding.videoRecyclerView.setAdapter(new VideoViewAdapter(getActivity(), Utility.generateVideoList(), this));
+
+        //videoPlayerBinding.videoMotionLayout.getViewToDetectTouch()
+
 
     }
 
