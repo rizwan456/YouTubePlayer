@@ -52,13 +52,6 @@ public class BlankFragment extends Fragment {
     private String mParam2;
 
     FragmentBlankBinding blankBinding;
-    private SimpleExoPlayer player;
-
-    private static final DefaultBandwidthMeter BANDWIDTH_METER = new DefaultBandwidthMeter();
-
-    private long playbackPosition;
-    private int currentWindow;
-    private boolean playWhenReady = true;
 
 
     public BlankFragment() {
@@ -97,137 +90,11 @@ public class BlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         blankBinding= DataBindingUtil.inflate(inflater,R.layout.fragment_blank, container, false);
-        setUp();
         return blankBinding.getRoot();
     }
 
     private void setUp() {
         //getPlayer();
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (Util.SDK_INT > 23) {
-            initializePlayer();
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if ((Util.SDK_INT <= 23 || player == null)) {
-            initializePlayer();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (Util.SDK_INT <= 23) {
-            releasePlayer();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (Util.SDK_INT > 23) {
-            releasePlayer();
-        }
-    }
-
-    private void initializePlayer() {
-        if (player == null) {
-            // a factory to create an AdaptiveVideoTrackSelection
-            TrackSelection.Factory adaptiveTrackSelectionFactory =
-                    new AdaptiveTrackSelection.Factory(BANDWIDTH_METER);
-            // let the factory create a player instance with default components
-            player = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(getActivity()),
-                    new DefaultTrackSelector(adaptiveTrackSelectionFactory), new DefaultLoadControl());
-            blankBinding.playerView.setPlayer(player);
-            player.setPlayWhenReady(playWhenReady);
-            player.seekTo(currentWindow, playbackPosition);
-        }
-        MediaSource mediaSource = buildMediaSource(Uri.parse(getString(R.string.media_url_dash)));
-        //MediaSource mediaSource = buildMediaSource(Uri.parse("https://www.youtube.com/watch?v=3tmd-ClpJxA"));
-        player.prepare(mediaSource, true, false);
-    }
-
-    private void releasePlayer() {
-        if (player != null) {
-            playbackPosition = player.getCurrentPosition();
-            currentWindow = player.getCurrentWindowIndex();
-            playWhenReady = player.getPlayWhenReady();
-            player.release();
-            player = null;
-        }
-    }
-
-    private MediaSource buildMediaSource(Uri uri) {
-        DashChunkSource.Factory dashChunkSourceFactory = new DefaultDashChunkSource.Factory(
-                new DefaultHttpDataSourceFactory("ua", BANDWIDTH_METER));
-        DataSource.Factory manifestDataSourceFactory = new DefaultHttpDataSourceFactory("ua");
-        return new DashMediaSource.Factory(dashChunkSourceFactory, manifestDataSourceFactory).
-                createMediaSource(uri);
-    }
-
-   /* private void getPlayer() {
-        // URL of the video to stream
-        String videoURL = "https://www.youtube.com/watch?v=3tmd-ClpJxA";
-
-        // Handler for the video player
-        Handler mainHandler = new Handler();
-
-	*//* A TrackSelector that selects tracks provided by the MediaSource to be consumed by each of the available Renderers.
-	  A TrackSelector is injected when the player is created. *//*
-        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-        TrackSelection.Factory videoTrackSelectionFactory =
-                new AdaptiveTrackSelection.Factory(bandwidthMeter);
-        TrackSelector trackSelector =
-                new DefaultTrackSelector(videoTrackSelectionFactory);
-
-        // Create the player with previously created TrackSelector
-        player = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector);
-
-        // Load the default controller
-        blankBinding.playerView.setUseController(true);
-        blankBinding.playerView.requestFocus();
-
-        // Load the SimpleExoPlayerView with the created player
-        blankBinding.playerView.setPlayer(player);
-
-        // Measures bandwidth during playback. Can be null if not required.
-        DefaultBandwidthMeter defaultBandwidthMeter = new DefaultBandwidthMeter();
-
-        // Produces DataSource instances through which media data is loaded.
-        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
-                getActivity(),
-                Util.getUserAgent(getContext(), "MyAppName"),
-                defaultBandwidthMeter);
-
-        // Produces Extractor instances for parsing the media data.
-        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-
-        // This is the MediaSource representing the media to be played.
-        MediaSource videoSource = new ExtractorMediaSource(
-                Uri.parse(videoURL),
-                dataSourceFactory,
-                extractorsFactory,
-                null,
-                null);
-
-        // Prepare the player with the source.
-        player.prepare(videoSource);
-
-        // Autoplay the video when the player is ready
-        player.setPlayWhenReady(true);
-    }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        // Release the player when it is not needed
-        player.release();
-    }*/
 
 }

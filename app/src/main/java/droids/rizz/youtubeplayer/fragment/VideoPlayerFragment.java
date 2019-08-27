@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import droids.rizz.youtubeplayer.MainActivity;
 import droids.rizz.youtubeplayer.R;
@@ -89,6 +88,11 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
 
         setUp();
         //changeVideo(mParam1);
+
+        /*videoPlayerBinding.videoMotionLayout.post(() -> {
+            videoPlayerBinding.videoMotionLayout.transitionToEnd();
+        });*/
+
         if (isFirst) {
             changeVideo(mParam1, mParam2);
         }
@@ -134,7 +138,9 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
         });
 
         videoPlayerBinding.cancelBtn.setOnClickListener(v -> {
-
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).removeVideoFragment(this);
+            }
         });
 
     }

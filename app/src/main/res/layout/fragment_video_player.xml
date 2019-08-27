@@ -18,6 +18,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
+            app:cardBackgroundColor="#F6FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -36,7 +37,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="Name of the video NAme of the video Name of the video"
+                    android:text="Name of the video Name of the video Name of the video"
                     android:textColor="#E12C2C2C"
                     android:textSize="13sp" />
 

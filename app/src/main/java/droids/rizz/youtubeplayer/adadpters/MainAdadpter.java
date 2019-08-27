@@ -14,6 +14,7 @@ import java.util.List;
 import droids.rizz.youtubeplayer.MainActivity;
 import droids.rizz.youtubeplayer.R;
 import droids.rizz.youtubeplayer.databinding.MainViewItemsBinding;
+import droids.rizz.youtubeplayer.fragment.BlankFragment;
 import droids.rizz.youtubeplayer.fragment.VideoPlayerFragment;
 import droids.rizz.youtubeplayer.model.VideoInfo;
 
@@ -22,6 +23,7 @@ public class MainAdadpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     Context context;
     List<VideoInfo> infoList;
+    boolean status = false;
 
     public MainAdadpter(Context context, List<VideoInfo> infoList) {
         this.context = context;
@@ -63,13 +65,23 @@ public class MainAdadpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             itemsBinding.videoThumbnail.setOnClickListener(v -> {
                 if (context instanceof MainActivity) {
+
                     Fragment fragment = ((MainActivity) context).getSupportFragmentManager().findFragmentById(R.id.container);
+
                     if (fragment instanceof VideoPlayerFragment) {
+                        //when video is playing
                         VideoPlayerFragment videoPlayerFragment = (VideoPlayerFragment) fragment;
                         videoPlayerFragment.changeVideo(infoList.get(pos).getImageUrl(), infoList.get(pos).getTitle());
-                    } else {
-                        ((MainActivity) context).setVisible(infoList.get(pos).getImageUrl(), infoList.get(pos).getTitle());
                     }
+                    else if (fragment instanceof BlankFragment) {
+                        //when video closed
+                        ((MainActivity) context).addBlankFrgment(fragment);
+                    }
+                    else {
+                        //when fragment null
+                        ((MainActivity) context).addVideoFragment(infoList.get(pos).getImageUrl(), infoList.get(pos).getTitle());
+                    }
+
                 }
             });
         }
