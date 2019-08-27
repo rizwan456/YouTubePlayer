@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.recyclerview.setAdapter(new MainAdadpter(this, Utility.generateVideoList()));
     }
 
-    public void setVisible(String url) {
-        getSupportFragmentManager().beginTransaction().add(R.id.container, VideoPlayerFragment.newInstance(url, null,true)).commit();
+    public void setVisible(String url,String title) {
+        getSupportFragmentManager().beginTransaction().add(R.id.container, VideoPlayerFragment.newInstance(url, title,true)).commit();
     }
 
 

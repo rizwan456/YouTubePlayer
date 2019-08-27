@@ -66,9 +66,9 @@ public class MainAdadpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     Fragment fragment = ((MainActivity) context).getSupportFragmentManager().findFragmentById(R.id.container);
                     if (fragment instanceof VideoPlayerFragment) {
                         VideoPlayerFragment videoPlayerFragment = (VideoPlayerFragment) fragment;
-                        videoPlayerFragment.changeVideo(infoList.get(pos).getImageUrl());
+                        videoPlayerFragment.changeVideo(infoList.get(pos).getImageUrl(), infoList.get(pos).getTitle());
                     } else {
-                        ((MainActivity) context).setVisible(infoList.get(pos).getImageUrl());
+                        ((MainActivity) context).setVisible(infoList.get(pos).getImageUrl(), infoList.get(pos).getTitle());
                     }
                 }
             });
