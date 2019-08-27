@@ -39,10 +39,10 @@ public class VideoPlayer extends Fragment {
 
     //for video player
     private static final DefaultBandwidthMeter BANDWIDTH_METER = new DefaultBandwidthMeter();
-    private SimpleExoPlayer player;
-    private long playbackPosition;
-    private int currentWindow;
-    private boolean playWhenReady = true;
+    private static SimpleExoPlayer player;
+    private static long playbackPosition;
+    private static int currentWindow;
+    private static boolean playWhenReady = true;
 
 
     public VideoPlayer() {
@@ -77,6 +77,7 @@ public class VideoPlayer extends Fragment {
     }
 
     private void setUp() {
+
     }
 
     @Override
@@ -136,7 +137,7 @@ public class VideoPlayer extends Fragment {
                 createMediaSource(uri);
     }
 
-    private void releasePlayer() {
+    public static void releasePlayer() {
         if (player != null) {
             playbackPosition = player.getCurrentPosition();
             currentWindow = player.getCurrentWindowIndex();

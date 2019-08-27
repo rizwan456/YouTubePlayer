@@ -72,12 +72,10 @@ public class MainAdadpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         //when video is playing
                         VideoPlayerFragment videoPlayerFragment = (VideoPlayerFragment) fragment;
                         videoPlayerFragment.changeVideo(infoList.get(pos).getImageUrl(), infoList.get(pos).getTitle());
-                    }
-                    else if (fragment instanceof BlankFragment) {
+                    } else if (fragment instanceof BlankFragment) {
                         //when video closed
-                        ((MainActivity) context).addBlankFrgment(fragment);
-                    }
-                    else {
+                        ((MainActivity) context).addBlankFragment(fragment);
+                    } else {
                         //when fragment null
                         ((MainActivity) context).addVideoFragment(infoList.get(pos).getImageUrl(), infoList.get(pos).getTitle());
                     }

@@ -35,6 +35,7 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
     private String mParam1;
     private String mParam2;
     private boolean isFirst = false;
+    private boolean status = false;
 
     public FragmentVideoPlayerBinding videoPlayerBinding;
 
@@ -71,6 +72,17 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
         return fragment;
     }
 
+    public static VideoPlayerFragment newInstance(String param1, String param2, boolean isFirst, boolean status) {
+        VideoPlayerFragment fragment = new VideoPlayerFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        args.putBoolean("First", isFirst);
+        args.putBoolean("Status", isFirst);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +90,7 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
             isFirst = getArguments().getBoolean("First", false);
+            status = getArguments().getBoolean("Status", false);
         }
     }
 
@@ -92,6 +105,13 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
         /*videoPlayerBinding.videoMotionLayout.post(() -> {
             videoPlayerBinding.videoMotionLayout.transitionToEnd();
         });*/
+        if (status) {
+            getChildFragmentManager().beginTransaction().replace(R.id.videoView, VideoPlayer.newInstance(null, null)).commit();
+            videoPlayerBinding.videoMotionLayout.post(() -> {
+                videoPlayerBinding.videoMotionLayout.transitionToEnd();
+                //videoPlayerBinding.videoTitle.setText(videoTitle);
+            });
+        }
 
         if (isFirst) {
             changeVideo(mParam1, mParam2);
@@ -139,7 +159,10 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
 
         videoPlayerBinding.cancelBtn.setOnClickListener(v -> {
             if (getActivity() instanceof MainActivity) {
-                ((MainActivity) getActivity()).removeVideoFragment(this);
+                //((MainActivity) getActivity()).removeVideoFragment(this);
+                /*videoPlayerBinding.videoMotionLayout.removeView(videoPlayerBinding.videoViewContainer);
+                videoPlayerBinding.videoMotionLayout.removeView(videoPlayerBinding.videoView);
+                VideoPlayer.releasePlayer();*/
             }
         });
 
@@ -148,6 +171,10 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
 
     @Override
     public void changeVideo(String videoUrl, String videoTitle) {
+       /* if (videoPlayerBinding.videoMotionLayout.getViewById(R.id.videoViewContainer) == null) {
+            videoPlayerBinding.videoMotionLayout.addView(videoPlayerBinding.videoViewContainer);
+            videoPlayerBinding.videoMotionLayout.addView(videoPlayerBinding.videoView);
+        }*/
         getChildFragmentManager().beginTransaction().replace(R.id.videoView, VideoPlayer.newInstance(null, null)).commit();
         videoPlayerBinding.videoMotionLayout.post(() -> {
             videoPlayerBinding.videoMotionLayout.transitionToEnd();

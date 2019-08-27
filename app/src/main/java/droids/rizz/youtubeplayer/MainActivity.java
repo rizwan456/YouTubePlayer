@@ -12,6 +12,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import droids.rizz.youtubeplayer.adadpters.MainAdadpter;
 import droids.rizz.youtubeplayer.databinding.ActivityMainBinding;
 import droids.rizz.youtubeplayer.fragment.BlankFragment;
+import droids.rizz.youtubeplayer.fragment.VideoPlayer;
 import droids.rizz.youtubeplayer.fragment.VideoPlayerFragment;
 import droids.rizz.youtubeplayer.supporters.Utility;
 
@@ -33,13 +34,6 @@ public class MainActivity extends AppCompatActivity {
         mainBinding.recyclerview.setAdapter(new MainAdadpter(this, Utility.generateVideoList()));
     }
 
-   /* public void setVisible(String url, String title) {
-        Toast.makeText(this, "in video", Toast.LENGTH_SHORT).show();
-        getSupportFragmentManager().beginTransaction().add(R.id.container,
-                VideoPlayerFragment.newInstance(url, title, true))
-                .commit();
-    }*/
-
     public void addVideoFragment(String url, String title) {
         getSupportFragmentManager().beginTransaction().replace(R.id.container,
                 VideoPlayerFragment.newInstance(url, title, true))
@@ -47,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Video Fragment Added", Toast.LENGTH_SHORT).show();
     }
 
-    public void addBlankFrgment(Fragment fragment) {
+    public void addBlankFragment(Fragment fragment) {
         if (fragment instanceof BlankFragment) {
             getSupportFragmentManager().beginTransaction().add(R.id.container,
                     BlankFragment.newInstance(null, null))
@@ -66,6 +60,5 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Fragment Removed with Blank Fragment", Toast.LENGTH_SHORT).show();
     }
-
 
 }

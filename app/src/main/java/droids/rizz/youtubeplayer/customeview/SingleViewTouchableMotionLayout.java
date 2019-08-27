@@ -100,8 +100,13 @@ public class SingleViewTouchableMotionLayout extends MotionLayout {
                 return super.onTouchEvent(event);
         }
         if (!touchStarted) {
-            getViewToDetectTouch().getHitRect(viewRect);
-            touchStarted = viewRect.contains(((int) event.getX()), ((int) event.getY()));
+            //getViewToDetectTouch().setClickable(false);
+            if (getViewToDetectTouch() == null) {
+                return false;
+            } else {
+                getViewToDetectTouch().getHitRect(viewRect);
+                touchStarted = viewRect.contains(((int) event.getX()), ((int) event.getY()));
+            }
         }
 
         return touchStarted && super.onTouchEvent(event);
