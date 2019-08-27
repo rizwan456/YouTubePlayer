@@ -41,17 +41,23 @@
                     android:textSize="13sp" />
 
                 <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="10dp"
+                    android:id="@+id/playBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="8dp"
                     android:src="@drawable/ic_music_player_play"
                     android:tint="@color/semiGray" />
 
                 <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="15dp"
+                    android:id="@+id/cancelBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="8dp"
                     android:src="@drawable/ic_close"
                     android:tint="@color/semiGray" />
 

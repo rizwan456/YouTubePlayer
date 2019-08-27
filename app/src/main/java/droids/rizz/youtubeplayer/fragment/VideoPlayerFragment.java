@@ -10,8 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
-import com.google.android.exoplayer2.SimpleExoPlayer;
+import android.widget.Toast;
 
 import droids.rizz.youtubeplayer.MainActivity;
 import droids.rizz.youtubeplayer.R;
@@ -91,7 +90,7 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
         setUp();
         //changeVideo(mParam1);
         if (isFirst) {
-            changeVideo(mParam1,mParam2);
+            changeVideo(mParam1, mParam2);
         }
         return videoPlayerBinding.getRoot();
     }
@@ -113,9 +112,7 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
                     case R.id.expanded:
                         break;
                     case R.id.collapsed:
-                        FrameLayout.MarginLayoutParams params = (FrameLayout.MarginLayoutParams)
-                                videoPlayerBinding.linearLayout.getLayoutParams();
-                        params.leftMargin = videoPlayerBinding.videoView.getRight() - videoPlayerBinding.videoView.getPaddingEnd();
+                        inCollapsedView();
                         break;
                 }
             }
@@ -127,9 +124,24 @@ public class VideoPlayerFragment extends Fragment implements IVideoPlayer {
 
     }
 
+    private void inCollapsedView() {
+        FrameLayout.MarginLayoutParams params = (FrameLayout.MarginLayoutParams)
+                videoPlayerBinding.linearLayout.getLayoutParams();
+        params.leftMargin = videoPlayerBinding.videoView.getRight() - videoPlayerBinding.videoView.getPaddingEnd();
+
+        videoPlayerBinding.playBtn.setOnClickListener(v -> {
+
+        });
+
+        videoPlayerBinding.cancelBtn.setOnClickListener(v -> {
+
+        });
+
+    }
+
 
     @Override
-    public void changeVideo(String videoUrl,String videoTitle) {
+    public void changeVideo(String videoUrl, String videoTitle) {
         getChildFragmentManager().beginTransaction().replace(R.id.videoView, VideoPlayer.newInstance(null, null)).commit();
         videoPlayerBinding.videoMotionLayout.post(() -> {
             videoPlayerBinding.videoMotionLayout.transitionToEnd();
